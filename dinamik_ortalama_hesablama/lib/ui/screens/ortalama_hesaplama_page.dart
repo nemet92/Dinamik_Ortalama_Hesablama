@@ -1,6 +1,7 @@
 import 'package:dinamik_ortalama_hesablama/constants/app_constants.dart';
 import 'package:dinamik_ortalama_hesablama/helper/data_helper.dart';
 import 'package:dinamik_ortalama_hesablama/model/ders.dart';
+import 'package:dinamik_ortalama_hesablama/ui/screens/ders_listesi.dart';
 import 'package:dinamik_ortalama_hesablama/ui/screens/ortalama_goster_page.dart';
 import 'package:flutter/material.dart';
 
@@ -50,13 +51,7 @@ class _OrtalamaHesaplamaPageState extends State<OrtalamaHesaplamaPage> {
             const SizedBox(
               height: 5,
             ),
-            Expanded(
-              flex: 1,
-              child: Container(
-                color: Colors.blue,
-                child: const Text("blue"),
-              ),
-            )
+            const Expanded(flex: 1, child: DersListesi())
           ],
         ));
   }
