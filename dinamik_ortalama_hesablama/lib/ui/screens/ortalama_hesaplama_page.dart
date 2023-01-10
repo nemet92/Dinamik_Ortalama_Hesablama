@@ -3,6 +3,8 @@ import 'package:dinamik_ortalama_hesablama/helper/data_helper.dart';
 import 'package:dinamik_ortalama_hesablama/model/ders.dart';
 import 'package:dinamik_ortalama_hesablama/ui/screens/ders_listesi.dart';
 import 'package:dinamik_ortalama_hesablama/ui/screens/ortalama_goster_page.dart';
+import 'package:dinamik_ortalama_hesablama/widget/harf_dropDown_widget.dart';
+import 'package:dinamik_ortalama_hesablama/widget/kredi_dropDown_widget.dart';
 import 'package:flutter/material.dart';
 
 class OrtalamaHesaplamaPage extends StatefulWidget {
@@ -21,6 +23,7 @@ class _OrtalamaHesaplamaPageState extends State<OrtalamaHesaplamaPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Colors.transparent,
@@ -51,7 +54,14 @@ class _OrtalamaHesaplamaPageState extends State<OrtalamaHesaplamaPage> {
             const SizedBox(
               height: 5,
             ),
-            const Expanded(flex: 1, child: DersListesi())
+            Expanded(
+                flex: 1,
+                child: DersListesi(
+                  onElemanCikarildi: (index) {
+                    DataHelper.tumEklenenDersler.removeAt(index);
+                    setState(() {});
+                  },
+                ))
           ],
         ));
   }
@@ -74,13 +84,21 @@ class _OrtalamaHesaplamaPageState extends State<OrtalamaHesaplamaPage> {
               Expanded(
                 child: Padding(
                   padding: Sabitler.yatayPadding8,
-                  child: _buildHarfler(),
+                  child: HarfDropDownWidget(
+                    onHarfSecildi: (harf) {
+                      secilenHerfDeger = harf;
+                    },
+                  ),
                 ),
               ),
               Expanded(
                 child: Padding(
                   padding: Sabitler.yatayPadding8,
-                  child: _buildKrediler(),
+                  child: KrediDropDownWidget(
+                    onKrediSecildi: (kredi) {
+                      secilenKrediDeger = kredi;
+                    },
+                  ),
                 ),
               ),
               IconButton(
@@ -118,46 +136,6 @@ class _OrtalamaHesaplamaPageState extends State<OrtalamaHesaplamaPage> {
           filled: true,
           fillColor: Sabitler.anaRenk.shade100.withOpacity(0.3)),
     );
-  }
-
-  _buildHarfler() {
-    return Container(
-        alignment: Alignment.center,
-        padding: Sabitler.dropDownPadding,
-        decoration: BoxDecoration(
-            color: Sabitler.anaRenk.shade100.withOpacity(0.3),
-            borderRadius: Sabitler.borderRadius),
-        child: DropdownButton<double>(
-            elevation: 0,
-            iconEnabledColor: Sabitler.anaRenk.shade200,
-            underline: Container(),
-            onChanged: ((value) {
-              setState(() {
-                secilenHerfDeger = value!;
-              });
-            }),
-            value: secilenHerfDeger,
-            items: DataHelper.tumDerslerinHarfleri()));
-  }
-
-  _buildKrediler() {
-    return Container(
-        alignment: Alignment.center,
-        padding: Sabitler.dropDownPadding,
-        decoration: BoxDecoration(
-            color: Sabitler.anaRenk.shade100.withOpacity(0.3),
-            borderRadius: Sabitler.borderRadius),
-        child: DropdownButton<double>(
-            elevation: 0,
-            iconEnabledColor: Sabitler.anaRenk.shade200,
-            underline: Container(),
-            onChanged: ((value) {
-              setState(() {
-                secilenKrediDeger = value!;
-              });
-            }),
-            value: secilenKrediDeger,
-            items: DataHelper.tumDerslerinKredileri()));
   }
 
   void _dersEkleveOrtalamaHesapla() {
