@@ -15,4 +15,7 @@ class Sabitler {
 
   static final TextStyle ortalamaSayisiStyle = GoogleFonts.quicksand(
       fontSize: 56, fontWeight: FontWeight.w600, color: anaRenk);
+
+  static const EdgeInsets dropDownPadding =
+      EdgeInsets.symmetric(horizontal: 16, vertical: 8);
 }
