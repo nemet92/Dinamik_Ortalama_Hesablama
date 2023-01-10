@@ -8,7 +8,7 @@ class Sabitler {
   static final TextStyle basliqStyle = GoogleFonts.quicksand(
       fontSize: 24, fontWeight: FontWeight.w900, color: anaRenk);
 
-  static BorderRadius borderRadius = BorderRadius.circular(24);
+  static BorderRadius borderRadius = BorderRadius.circular(16);
 
   static final TextStyle ortalamaGosterBodySayisiStyle = GoogleFonts.quicksand(
       fontSize: 16, fontWeight: FontWeight.w600, color: anaRenk);
@@ -18,4 +18,6 @@ class Sabitler {
 
   static const EdgeInsets dropDownPadding =
       EdgeInsets.symmetric(horizontal: 16, vertical: 8);
+
+  static const yatayPadding8 = EdgeInsets.symmetric(horizontal: 8);
 }

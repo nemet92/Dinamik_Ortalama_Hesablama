@@ -1,6 +1,22 @@
+import 'package:dinamik_ortalama_hesablama/model/ders.dart';
 import 'package:flutter/material.dart';
 
 class DataHelper {
+  static List<Ders> tumEklenenDersler = [];
+  static dersEkle(Ders ders) {
+    tumEklenenDersler.add(ders);
+  }
+
+  static double ortalmaHesapla() {
+    double toplamNot = 0;
+    double toplamKredi = 0;
+    for (var element in tumEklenenDersler) {
+      toplamNot = toplamNot + (element.krediDegeri * element.harfDegeri);
+      toplamKredi += element.krediDegeri;
+    }
+    return toplamNot / toplamKredi;
+  }
+
   static List<String> _tumDerslerinHarifleri() {
     return ["AA", "BA", "BB", "CB", "CC", "DC", "DD", "FD", "FF"];
   }
@@ -15,9 +31,9 @@ class DataHelper {
         return 3.0;
 
       case "CB":
-        return 6;
+        return 2.5;
       case "CC":
-        return 3.7;
+        return 2;
       case "DC":
         return 8.5;
       case "DD":
@@ -31,6 +47,23 @@ class DataHelper {
       default:
         return 1;
     }
+  }
+
+  static List<int> _tumKrediler() {
+    return List.generate(10, (index) => index + 1);
+  }
+
+  static List<DropdownMenuItem<double>> tumDerslerinKredileri() {
+    return _tumKrediler()
+        .map(
+          (e) => DropdownMenuItem(
+            value: e.toDouble(),
+            child: Text(
+              e.toString(),
+            ),
+          ),
+        )
+        .toList();
   }
 
   static List<DropdownMenuItem<double>> tumDerslerinHarfleri() {
